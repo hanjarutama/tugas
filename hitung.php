@@ -1,20 +1,20 @@
-git branch<?php
+<?php
 
 $tujuan = $_POST['tujuan'];
-$jum_tiket = $_POST['jumlah_tiket'];
+$jumlah = $_POST['jumlah'];
 
-$harga = patokHarga($tujuan);
-$hargatotal = $harga * $jum_tiket;
+$harga = HargaAwal($tujuan);
+$hargatotal = $harga * $jumlah;
 
 echo "Tujuan = " . $tujuan, "<br>";
-echo "Harga = " . $harga, "<br>";
-echo "Jumlah Tiket = " . $jum_tiket, "<br>";
-$diskon = patokDiskon($jum_tiket, $hargatotal);
-echo "Total Harga Tiket = " . $hargatotal, "<br>";
+echo "Harga = Rp. " . $harga, "<br>";
+echo "Jumlah Tiket = " . $jumlah, " pcs<br>";
+$diskon = HargaDiskon($jumlah, $hargatotal);
+echo "Total Harga = Rp. " . $hargatotal, "<br>";
 $hargaakhir = $hargatotal - $diskon;
-echo "Total Bayar = " . $hargaakhir, "<br>";
+echo "Total Harga Setelah Diskon = Rp. " . $hargaakhir, "<br>";
 
-function patokHarga($tujuan)
+function HargaAwal($tujuan)
 {
     switch ($tujuan) {
         case "Jakarta":
@@ -34,15 +34,15 @@ function patokHarga($tujuan)
     }
     return $harga;
 }
-function patokDiskon($jum_tiket, $hargatotal)
+function HargaDiskon($jumlah, $hargatotal)
 {
-    if ($jum_tiket >= 10) {
+    if ($jumlah >= 10) {
         $diskon = $hargatotal * 0.2;
         echo "Diskon 20% = " . $diskon, "<br>";
-    } elseif ($jum_tiket >= 5) {
+    } elseif ($jumlah >= 5) {
         $diskon = $hargatotal * 0.15;
         echo "Diskon 15% = " . $diskon, "<br>";
-    } elseif ($jum_tiket >= 3) {
+    } elseif ($jumlah >= 3) {
         $diskon = $hargatotal * 0.1;
         echo "Diskon 10% = " . $diskon, "<br>";
     } else {
